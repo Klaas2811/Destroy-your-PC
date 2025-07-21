@@ -40,3 +40,10 @@ README.md – This warning
 
 📜 License
 MIT License — Use at your own risk.
+
+## ❗ Legal Disclaimer
+
+This repository is strictly intended for **educational**, **cybersecurity research**, and **virtual machine testing** purposes only.  
+Running this script on a physical machine or another user's device without permission may be illegal.  
+By using this code, you take full responsibility for any consequences.
+

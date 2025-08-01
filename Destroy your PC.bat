@@ -2,7 +2,7 @@
 title Destroy Your PC Launcher
 color 0C
 
-echo WARNING: You are about to run Destroy Your PC. Made by Klaas2811.
+echo WARNING: You are about to run Destroy Your PC. Made by Klaas2811. IT IS A MALWARE!
 echo It will install the payload and activate it after reboot.
 echo.
 set /p answer=Are you sure? Type "yes" to continue: 

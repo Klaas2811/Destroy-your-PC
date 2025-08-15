@@ -1,4 +1,4 @@
-⚠️ Destroy Your PC
+⚠️ **Destroy Your PC**
 🚫 DANGEROUS SCRIPT — FOR EDUCATIONAL PURPOSES AND VM TESTING ONLY
 
 🔥 What is this?
@@ -39,7 +39,7 @@ README.md – This warning
 (No payload breakdown included to avoid abuse)
 
 📜 License
-MIT License — Use at your own risk.
+MIT License — **Use at your own risk**.
 
 ## ❗ Legal Disclaimer
 

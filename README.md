@@ -1,5 +1,5 @@
 ⚠️ **Destroy Your PC**
-🚫 DANGEROUS SCRIPT — FOR EDUCATIONAL PURPOSES AND VM TESTING ONLY
+🚫 **DANGEROUS SCRIPT — FOR EDUCATIONAL PURPOSES AND VM TESTING ONLY**
 
 🔥 What is this?
 This project contains a real, destructive payload intended to crash or corrupt a system.

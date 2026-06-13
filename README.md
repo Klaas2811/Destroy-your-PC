@@ -1,4 +1,4 @@
-**🚨RUN AS ADMIN🚨**                                                                                                                                                                                            
+**🚨RUN AS ADMIN🚨**                                                                            **V2 is finally out!**                                                                                                                
 ⚠️ **Destroy Your PC**
 🚫 **DANGEROUS SCRIPT — FOR EDUCATIONAL PURPOSES AND VM TESTING ONLY**
 

